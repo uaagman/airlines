@@ -1,7 +1,6 @@
-
-.idea/*
 classes/
 lib/
 src/test/
 target/
 *.iml
+.idea
