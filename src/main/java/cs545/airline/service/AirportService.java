@@ -1,6 +1,7 @@
 package cs545.airline.service;
 
 import cs545.airline.dao.AirportDao;
+import cs545.airline.model.Airplane;
 import cs545.airline.model.Airport;
 import cs545.airline.model.Flight;
 
@@ -63,5 +64,9 @@ public class AirportService {
 
     public List<Airport> findAll() {
         return airportDao.findAll();
+    }
+
+    public Airport findById(long id){
+        return airportDao.findOne(id);
     }
 }

@@ -19,15 +19,34 @@ public class AirplaneDao {
     private EntityManager entityManager = JpaUtil.getEntityManager();
 
     public void create(Airplane airplane) {
+        if(!entityManager.getTransaction().isActive())
+            entityManager.getTransaction().begin();
+
         entityManager.persist(airplane);
+
+        entityManager.flush();
+        entityManager.getTransaction().commit();
     }
 
     public Airplane update(Airplane airplane) {
-        return entityManager.merge(airplane);
+        if(!entityManager.getTransaction().isActive())
+            entityManager.getTransaction().begin();
+
+        Airplane airplane1 = entityManager.merge(airplane);
+
+        entityManager.flush();
+        entityManager.getTransaction().commit();
+        return airplane1;
     }
 
     public void delete(Airplane airplane) {
+        if(!entityManager.getTransaction().isActive())
+            entityManager.getTransaction().begin();
+
         entityManager.remove(airplane);
+
+        entityManager.flush();
+        entityManager.getTransaction().commit();
     }
 
     public Airplane findOne(long id) {

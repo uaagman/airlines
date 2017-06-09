@@ -25,6 +25,8 @@ public class AirlineService {
         airlineDao.create(airport);
     }
 
+    public Airline findById(long id){ return airlineDao.findOne(id); }
+
     public void delete(Airline airport) {
         airlineDao.delete(airport);
     }

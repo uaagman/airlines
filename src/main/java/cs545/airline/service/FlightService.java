@@ -55,10 +55,6 @@ public class FlightService {
         return flightDao.findByDestination(airport.getId());
     }
 
-    public List<Flight> findByArrival(Airplane airplane) {
-        return flightDao.findByAirplane(airplane.getId());
-    }
-
     public List<Flight> findByArrival(Date datetime) {
         return flightDao.findByArrival(datetime, datetime);
     }
@@ -77,6 +73,10 @@ public class FlightService {
 
     public List<Flight> findAll() {
         return flightDao.findAll();
+    }
+
+    public Flight findById(long id){
+        return flightDao.findOne(id);
     }
 
 }

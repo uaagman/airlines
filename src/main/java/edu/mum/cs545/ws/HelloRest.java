@@ -6,7 +6,6 @@ import cs545.airline.service.AirlineService;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 @Named
@@ -22,7 +21,7 @@ public class HelloRest {
         return Response.status(200).entity(result).build();
     }
 
-    @Path("airline")
+    @Path("airlines")
     @GET
     public Response getAirlineTest() {
         String result = "Nil!";
@@ -30,16 +29,6 @@ public class HelloRest {
         if (airline != null) {
             result = "This is an airline: " + airline.getName();
         }
-        return Response.status(200).entity(airline).build();
+        return Response.status(200).entity(result).build();
     }
-
-    @Path("saveAirline")
-    @POST
-    @Consumes("application/x-www-form-urlencoded")
-    public Response saveAirline(final MultivaluedMap<String, String> formParams){
-        airlineService.create(new Airline(formParams.getFirst("name")));
-
-        return Response.status(200).entity(airlineService.findByName(formParams.getFirst("name"))).build();
-    }
-
 }

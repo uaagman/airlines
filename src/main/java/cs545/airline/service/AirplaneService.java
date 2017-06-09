@@ -53,4 +53,8 @@ public class AirplaneService {
         return airplaneDao.findAll();
     }
 
+    public Airplane findById(long id){
+        return airplaneDao.findOne(id);
+    }
+
 }
