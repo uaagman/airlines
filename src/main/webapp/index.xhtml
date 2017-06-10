@@ -5,7 +5,19 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-   <f:view>
-      <h:outputLabel value="Hello, world"/>
-   </f:view>
+<h:body>
+    <ui:composition template="inc/template.xhtml">
+        <ui:define name="title">
+            Airline | Home
+        </ui:define>
+        <ui:define name="top">
+            Welcome to Airline Home
+        </ui:define>
+
+        <ui:define name="content">
+            <br/><h:link outcome="flights" value="Flight Details" styleClass="btn"/><br/><br/>
+            <h:link outcome="airlines" value="Airlines Details" styleClass="btn"/>
+        </ui:define>
+    </ui:composition>
+</h:body>
 </html>

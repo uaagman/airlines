@@ -31,11 +31,11 @@ public class FlightRest {
 
     @Path("{id}")
     @GET
-    public Response getFlight(@PathParam("id") long id) {
+    public Flight getFlight(@PathParam("id") long id) {
         try {
-            return Response.status(200).entity(flightService.findById(id)).build();
+            return flightService.findById(id);
         }catch (Exception ex){
-            return Response.status(500).entity(ex.getMessage()).build();
+            return null;
         }
     }
 
@@ -64,24 +64,24 @@ public class FlightRest {
 
     @Path("delete/{id}")
     @DELETE
-    public Response deleteFlight(@PathParam("id") long id){
+    public Flight deleteFlight(@PathParam("id") long id){
         try{
             Flight flight = flightService.findById(id);
             flightService.delete(flight);
-            return Response.status(200).entity(flight).build();
+            return flight;
         }catch (Exception ex){
-            return Response.status(500).entity(ex.getMessage()).build();
+            return null;
         }
     }
 
     @Path("update")
     @Consumes(MediaType.APPLICATION_JSON)
     @PUT
-    public Response updateFlight(Flight flight){
+    public Flight updateFlight(Flight flight){
         try{
-            return Response.status(200).entity(flightService.update(flight)).build();
+            return flightService.update(flight);
         }catch (Exception ex){
-            return Response.status(500).entity(ex.getMessage()).build();
+            return null;
         }
     }
 }

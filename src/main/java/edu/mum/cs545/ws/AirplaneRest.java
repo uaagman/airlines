@@ -32,31 +32,31 @@ public class AirplaneRest {
 
     @Path("{id}")
     @GET
-    public Response getAirplane(@PathParam("id") long id) {
+    public Airplane getAirplane(@PathParam("id") long id) {
         try {
-            return Response.status(200).entity(airplaneService.findById(id)).build();
+            return airplaneService.findById(id);
         }catch (Exception ex){
-            return Response.status(500).entity(ex.getMessage()).build();
+            return null;
         }
     }
 
     @Path("serial")
     @GET
-    public Response getAirplanes(@QueryParam("serialNo") String serialNo) {
+    public Airplane getAirplanes(@QueryParam("serialNo") String serialNo) {
         try {
-            return Response.status(200).entity(airplaneService.findBySrlnr(serialNo)).build();
+            return airplaneService.findBySrlnr(serialNo);
         }catch (Exception ex){
-            return Response.status(500).entity(ex.getMessage()).build();
+            return null;
         }
     }
 
     @Path("model")
     @GET
-    public Response getAirplaneByModel(@QueryParam("model") String modelNo) {
+    public List<Airplane> getAirplaneByModel(@QueryParam("model") String modelNo) {
         try {
-            return Response.status(200).entity(airplaneService.findByModel(modelNo)).build();
+            return airplaneService.findByModel(modelNo);
         }catch (Exception ex){
-            return Response.status(500).entity(ex.getMessage()).build();
+            return null;
         }
     }
 
@@ -74,24 +74,24 @@ public class AirplaneRest {
 
     @Path("delete/{id}")
     @DELETE
-    public Response deleteAirplane(@PathParam("id") long id){
+    public Airplane deleteAirplane(@PathParam("id") long id){
         try{
             Airplane airplane = airplaneService.findById(id);
             airplaneService.delete(airplane);
-            return Response.status(200).entity(airplane).build();
+            return airplane;
         }catch (Exception ex){
-            return Response.status(500).entity(ex.getMessage()).build();
+            return null;
         }
     }
 
     @Path("update")
     @Consumes(MediaType.APPLICATION_JSON)
     @PUT
-    public Response updateAirplane(Airplane airplane){
+    public Airplane updateAirplane(Airplane airplane){
         try{
-            return Response.status(200).entity(airplaneService.update(airplane)).build();
+            return airplaneService.update(airplane);
         }catch (Exception ex){
-            return Response.status(500).entity(ex.getMessage()).build();
+            return null;
         }
     }
 }

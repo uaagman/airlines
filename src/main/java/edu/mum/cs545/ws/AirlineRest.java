@@ -7,8 +7,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -33,11 +31,11 @@ public class AirlineRest {
 
     @Path("{id}")
     @GET
-    public Response getAirline(@PathParam("id") long id) {
+    public Airline getAirline(@PathParam("id") long id) {
         try {
-            return Response.status(200).entity(airlineService.findById(id)).build();
+            return airlineService.findById(id);
         }catch (Exception ex){
-            return Response.status(500).entity("").build();
+            return null;
         }
     }
 
@@ -45,12 +43,12 @@ public class AirlineRest {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @POST
-    public Response saveAirline(Airline airline){
+    public Airline saveAirline(Airline airline){
         try {
             airlineService.create(airline);
-            return Response.ok().entity(airlineService.findByName(airline.getName())).build();
+            return airlineService.findByName(airline.getName());
         }catch (Exception exp){
-            return Response.status(500).entity("").build();
+            return null;
         }
     }
     /*public Response saveAirline(final MultivaluedMap<String, String> formParams){
@@ -66,24 +64,24 @@ public class AirlineRest {
 
     @Path("delete/{id}")
     @DELETE
-    public Response deleteAirline(@PathParam("id") long id){
+    public Airline deleteAirline(@PathParam("id") long id){
         try{
             Airline airline = airlineService.findById(id);
             airlineService.delete(airline);
-            return Response.status(200).entity(airline).build();
+            return airline;
         }catch (Exception ex){
-            return Response.status(500).entity("").build();
+            return null;
         }
     }
 
     @Path("update")
     @Consumes(MediaType.APPLICATION_JSON)
     @PUT
-    public Response updateAirline(Airline airline){
+    public Airline updateAirline(Airline airline){
         try{
-            return Response.status(200).entity(airlineService.update(airline)).build();
+            return airlineService.update(airline);
         }catch (Exception ex){
-            return Response.status(500).entity("").build();
+            return null;
         }
     }
 }
