@@ -15,13 +15,13 @@ import java.util.List;
  */
 @Named
 @RequestScoped
-public class airlineController {
+public class AirlineController {
     @Inject
     AirlineService airlineService;
 
     Airline airline;
 
-    airlineController(){
+    AirlineController(){
         airline = new Airline();
     }
 
