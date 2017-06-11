@@ -4,6 +4,8 @@ import cs545.airline.model.Airline;
 import cs545.airline.service.AirlineService;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
@@ -36,8 +38,15 @@ public class airlineController {
     }
 
     public String save(){
-        if(!airline.getName().equals("")){
-            airlineService.create(airline);
+        try {
+            if (!airline.getName().equals("")) {
+                airlineService.create(airline);
+                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Airline Created with ID "+airline.getId()+" and name = "+airline.getName(),""));
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN,"Name shouldn't be empty",""));
+            }
+        }catch (Exception ex){
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error Saving Data either due to duplicate key or database error",ex.getMessage()));
         }
         return null;
     }

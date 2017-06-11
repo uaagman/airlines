@@ -18,48 +18,26 @@
         <ui:define name="content">
             <br/><h:link value="Home" outcome="index" styleClass="btn"/>
             <h:form style="float: right">
-                <h:outputLabel for="fil">Filter By</h:outputLabel>
-                <h:selectOneMenu binding="#{findBy}" id="fil">
-                    <f:selectItems value="#{jsfController.filterValues}"/>
-                </h:selectOneMenu>
-                <h:inputText id="inp" binding="#{findByText}" p:placeholder="searchText"/>
-                <h:commandButton value="Go" action="#{jsfController.updateFlights(findBy.value,findByText.value)}">
-                    <!--<f:ajax execute="#{jsfController.updateFlights(findBy.value,findByText.value)}" render="forRender"/>-->
-                </h:commandButton>
+                <f:ajax render=":forRender">
+                    <h:outputLabel for="fil">Filter By</h:outputLabel>
+                    <h:selectOneMenu binding="#{findBy}" id="fil">
+                        <f:selectItems value="#{jsfController.filterValues}"/>
+                        <!--<f:selectItem itemValue="" itemLabel="&#45;&#45;Select One&#45;&#45;"/>
+                        <f:selectItem itemValue="airline" itemLabel="Airline"/>
+                        <f:selectItem itemValue="destination" itemLabel="Destination"/>
+                        <f:selectItem itemValue="departure" itemLabel="Departure date/time"/>
+                        <f:selectItem itemValue="arrival" itemLabel="Arrival date/time"/>-->
+                        <f:valueChangeListener for="fil"/>
+                    </h:selectOneMenu>
+                    <h:inputText id="inp" binding="#{findByText}" p:placeholder="searchText"/>
+                    <h:commandButton value="Go" action="#{jsfController.updateFlights(findBy.value,findByText.value)}">
+                        <!--<f:ajax execute="#{jsfController.updateFlights(findBy.value,findByText.value)}" render="forRender"/>-->
+                    </h:commandButton>
+                </f:ajax>
             </h:form>
             <br/><br/>
             <h:panelGrid id="forRender">
-                <h:dataTable value="#{jsfController.flights}" var="flight" id="dataTable">
-                    <f:facet name="header">Flight Details</f:facet>
-                    <h:column>
-                        <f:facet name="header">Flight Number</f:facet>
-                        #{flight.flightnr}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Airline</f:facet>
-                        #{flight.airline.name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Airplane (No. /model /capacity)</f:facet>
-                        #{flight.airplane.serialnr} / #{flight.airplane.model} / #{flight.airplane.capacity}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Origin</f:facet>
-                        #{flight.origin.name} (#{flight.origin.airportcode}), #{flight.origin.city}, #{flight.origin.country}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Departure</f:facet>
-                        #{flight.departureDate} #{flight.departureTime}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Destination</f:facet>
-                        #{flight.destination.name} (#{flight.destination.airportcode}), #{flight.destination.city}, #{flight.destination.country}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Arrival</f:facet>
-                        #{flight.arrivalDate} #{flight.arrivalTime}
-                    </h:column>
-                </h:dataTable>
+                <ui:include src="inc/flightFragment.xhtml"/>
             </h:panelGrid>
         </ui:define>
     </ui:composition>

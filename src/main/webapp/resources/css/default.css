@@ -25,9 +25,20 @@
 }
 table {
     border-collapse: collapse;
+    width: 100%;
 }
 
 table, td, th {
     border: 1px solid black;
     padding: 3px;
+}
+.table-header{
+    background-color: darkblue;
+    color: white;
+}
+.table-even-row{
+    background-color: lightblue;
+}
+.table-odd-row{
+    background-color: lightcyan;
 }

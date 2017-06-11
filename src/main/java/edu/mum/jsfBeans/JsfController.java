@@ -34,6 +34,7 @@ public class JsfController{
 
     private static Map<String, String> filterValues;
     private static List<Flight> flights;
+    private int run = 0;
 
     static {
         filterValues = new LinkedHashMap<>();
@@ -49,6 +50,7 @@ public class JsfController{
     }
 
     public String updateFlights(String filterBy, String filterText) {
+        run=1;
         if ("airline".equals(filterBy)) {
             Airline airline = airlineService.findByName(filterText);
             flights = flightService.findByAirline(airline);
@@ -72,13 +74,14 @@ public class JsfController{
                 flights = null;
             }
         } else {
-            flights = flightService.findAll();
+//            flights = flightService.findAll();
+            run = 0;
         }
         return null;
     }
 
     public List<Flight> getFlights() {
-        if(flights != null){
+        if(run != 0){
             return flights;
         } else {
             return flightService.findAll();
