@@ -15,8 +15,10 @@
         </ui:define>
 
         <ui:define name="content">
-            <br/><h:link outcome="flights" value="Flight Details" styleClass="btn"/><br/><br/>
-            <h:link outcome="airlines" value="Airlines Details" styleClass="btn"/>
+            <br/><h:form>
+                <h:commandLink action="flight" value="Flight Details" styleClass="btn"/><br/><br/>
+                <h:commandLink action="airline" value="Airlines Details" styleClass="btn"/>
+            </h:form>
         </ui:define>
     </ui:composition>
 </h:body>

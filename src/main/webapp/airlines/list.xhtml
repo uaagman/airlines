@@ -18,8 +18,12 @@
         </ui:define>
 
         <ui:define name="content">
-            <br/><h:link value="Home" outcome="exit" styleClass="btn"/>
-            <h:link value="Create Airline" outcome="next" styleClass="btn"/><br/><br/>
+            <br/>
+            <h:form>
+                <h:commandLink value="Home" action="exit" styleClass="btn"/>
+                <h:commandLink value="Create Airline" action="next" styleClass="btn"/>
+            </h:form>
+            <br/><br/>
             <h:form>
                 <h:dataTable value="#{airlineController.airlines}" var="airline" id="dataTable"
                              styleClass="table"
