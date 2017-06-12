@@ -42,8 +42,8 @@ public class JsfController{
         filterValues.put("Airline", "airline");
         filterValues.put("Destination Airport Code", "destination");
         filterValues.put("Origin Airport Code", "origin");
-        filterValues.put("Departure date", "departure");
-        filterValues.put("Arrival date", "arrival");
+        filterValues.put("Departure date/time", "departure");
+        filterValues.put("Arrival date/time", "arrival");
     }
 
     public Map<String, String> getFilterValues() {
@@ -62,8 +62,8 @@ public class JsfController{
             Airport airport = airportService.findByCode(filterText);
             flights = flightService.findByOrigin(airport);
         } else if ("departure".equals(filterBy)) {
-//            DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
-            DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+            DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
+//            DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
             try {
                 flights = flightService.findByDeparture(df.parse(filterText));
             } catch (ParseException e) {
@@ -71,7 +71,8 @@ public class JsfController{
                 flights = null;
             }
         } else if ("arrival".equals(filterBy)) {
-            DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+            DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
+//            DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
             try {
                 flights = flightService.findByArrival(df.parse(filterText));
             } catch (ParseException e) {

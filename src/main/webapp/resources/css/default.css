@@ -17,20 +17,31 @@
     margin-top: 45px;
     padding: 0 3%;
 }
-#content .btn{
+#content .btn, .btn-home{
     margin: 2px;
-    padding: 3px;
+    padding: 5px;
     background-color: aliceblue;
     border: 1px solid red;
+    border-radius: 15px;
+    text-decoration: none;
+}
+#content .btn:hover, .btn-home:hover{
+    background-color: lightblue;
 }
 table {
     border-collapse: collapse;
     width: 100%;
+    border: 1px solid black;
+    padding: 5px 0;
 }
 
-table, td, th {
+table td {
+    border-left: 1px solid black;
+    text-align: center;
+    padding: 5px 0;
+}
+table th{
     border: 1px solid black;
-    padding: 3px;
 }
 .table-header{
     background-color: darkblue;
@@ -41,4 +52,7 @@ table, td, th {
 }
 .table-odd-row{
     background-color: lightcyan;
+}
+#forRender>tbody>tr:first-child, #forRender>tbody>tr:last-child {
+    display: none;
 }

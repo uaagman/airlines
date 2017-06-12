@@ -40,8 +40,8 @@ public class AirportDao {
     }
 
     public void delete(Airport airport) {
-        entityManager.flush();
-        entityManager.getTransaction().commit();
+        if(!entityManager.getTransaction().isActive())
+            entityManager.getTransaction().begin();
 
         entityManager.remove(airport);
 
